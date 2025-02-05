@@ -1,3 +1,4 @@
+/*global chrome */
 import * as pdfjs from 'pdfjs-dist';
 import mammoth from 'mammoth';
 

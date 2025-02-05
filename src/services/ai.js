@@ -16,7 +16,7 @@ let models = {};
 async function initializeAIServices() {
   try {
     const keys = await chrome.storage.local.get(['openaiKey', 'anthropicKey']);
-    
+
     if (!keys.openaiKey) {
       throw new Error('OpenAI API key not found. Please set it in the extension options.');
     }
@@ -51,19 +51,19 @@ async function initializeAIServices() {
 // Analysis prompt template
 const analysisPrompt = PromptTemplate.fromTemplate(`
     Analyze the following job description and resume to provide detailed matching feedback:
-    
+
     Job Description:
     {jobDescription}
-    
+
     Resume:
     {resume}
-    
+
     You must respond with a valid JSON object that matches this exact structure. Each field is required:
     - matchScore: A number from 0 to 100 indicating the overall match percentage
     - matchingSkills: An array of strings listing skills found in both the resume and job description
     - missingSkills: An array of strings listing required skills from the job that are not found in the resume
     - recommendations: An array of strings with specific suggestions for acquiring the missing skills
-    
+
     Example response:
     {{
       "matchScore": 75,
@@ -90,7 +90,7 @@ const createAnalysisChain = (model) => {
 export async function initializeVectorStore(resume) {
   try {
     await initializeAIServices();
-    
+
     // Create vector store from resume
     const texts = resume.split('\n').filter(line => line.trim());
     vectorStore = await MemoryVectorStore.fromTexts(texts, {}, embeddings);
@@ -113,14 +113,14 @@ export async function analyzeJobMatch(jobDescription, modelName = 'gpt4') {
 
     // Clean and format job description
     const cleanedJobDescription = jobDescription.trim().replace(/\s+/g, ' ');
-    
+
     if (!cleanedJobDescription) {
       throw new Error('Job description is empty or invalid.');
     }
 
     // Perform similarity search using vector store
     const similarityResults = await vectorStore.similaritySearch(cleanedJobDescription, 5);
-    
+
     if (!similarityResults || similarityResults.length === 0) {
       throw new Error('No relevant resume sections found for this job description.');
     }
@@ -168,13 +168,12 @@ export async function getSuggestionForSkill(skill, modelName = 'gpt4') {
 
       Format your response exactly like this:
 
-      \`\`\`json
-      {
+
+      {{
         "shortTerm": ["Take an online course", "Build a small project"],
         "longTerm": ["Get certified", "Contribute to open source"],
         "resources": ["Specific course URL", "Recommended book title"]
-      }
-      \`\`\`
+      }}
 
       Important: Return only the JSON object, no other text.
     `);
@@ -191,4 +190,4 @@ export async function getSuggestionForSkill(skill, modelName = 'gpt4') {
     console.error('Error getting skill suggestions:', error);
     throw error;
   }
-} 
+}

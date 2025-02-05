@@ -18,15 +18,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 async function handleJobAnalysis(jobData, sendResponse) {
-  try {    
+  try {
     // Get resume data from chrome.storage
     const result = await chrome.storage.local.get(['resume']);
     const resumeContent = result.resume?.content;
-    
+
     if (!resumeContent) {
-      sendResponse({ 
-        success: false, 
-        error: 'Please upload your resume first' 
+      sendResponse({
+        success: false,
+        error: 'Please upload your resume first'
       });
       return;
     }
@@ -41,9 +41,9 @@ async function handleJobAnalysis(jobData, sendResponse) {
     // Validate job data
     if (!formattedJobData.title && !formattedJobData.description && formattedJobData.requirements.length === 0) {
       console.error('Job data is empty after formatting');
-      sendResponse({ 
-        success: false, 
-        error: 'Could not extract job data from the page. Please make sure you are on a job posting page.' 
+      sendResponse({
+        success: false,
+        error: 'Could not extract job data from the page. Please make sure you are on a job posting page.'
       });
       return;
     }

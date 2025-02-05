@@ -13,7 +13,9 @@
     "*://*.linkedin.com/*",
     "*://*.indeed.com/*",
     "*://*.glassdoor.com/*",
-    "*://*.greenhouse.io/*"
+    "*://*.greenhouse.io/*",
+    "*://*.lever.co/*",
+    "*://*.myworkdayjobs.com/*"
   ],
   "action": {
     "default_popup": "index.html",
@@ -37,7 +39,9 @@
         "*://*.linkedin.com/*",
         "*://*.indeed.com/*",
         "*://*.glassdoor.com/*",
-        "*://*.greenhouse.io/*"
+        "*://*.greenhouse.io/*",
+        "*://*.lever.co/*",
+        "*://*.myworkdayjobs.com/*"
       ],
       "js": ["content.js"]
     }
