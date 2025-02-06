@@ -51,10 +51,45 @@ pnpm run build
 - Enable "Developer mode" in the top right
 - Click "Load unpacked" and select the `dist` folder from the project
 
+## Usage Instructions
+
+### Initial Setup
+
+1. **OpenAI API Key**
+   - Get an API key from [OpenAI](https://platform.openai.com/api-keys)
+   - Open the extension's popup and click the settings icon
+   - Enter your OpenAI API key in the settings page
+
+2. **Resume Upload**
+   - In the extension settings, upload your resume (PDF format)
+   - This will be stored locally in your browser and used for job analysis
+
+3. **User Data for Autofill**
+   - Fill out your personal information in the settings page
+   - This data will be used to autofill job applications
+   - All information is stored locally in your browser's storage
+   - You can update this information at any time
+
+### Using the Extension
+
+1. **Job Analysis**
+   - Navigate to a supported job posting (LinkedIn, Indeed, Glassdoor, or Greenhouse)
+   - Click the extension icon to open the popup
+   - Click "Analyze Current Job" to see your match score and skill analysis
+
+2. **Form Autofill**
+   - When on a supported application form (currently Greenhouse)
+   - The extension will detect the form automatically
+   - Click "Autofill Form" in the popup
+   - Review the filled information before submitting
+
+### Privacy Note
+
+All your data (resume, personal information, and API key) is stored locally in your browser. No data is sent to external servers except when making API calls to OpenAI for job analysis.
+
 ## Important Note
 
 This is a proof of concept implementation created for a technical talk. While functional, it is not feature-complete and is meant to demonstrate the possibilities of AI-powered Chrome extensions.
-
 
 ## Full Version Coming Soon
 
